@@ -155,11 +155,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.of(context).pop(false);
-        return false;
-      },
+    return PopScope(
+      canPop: false,
       child: CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
             padding: EdgeInsetsDirectional.zero,
@@ -566,7 +563,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     StoreReserve.writeInBox(homeController.parkSpaces[index]!.number.toString(), homeController.parkSpaces[index]!.id!.toString());
                                     StoreParkId.writeInBox(homeController.parkSpaces[index]!.number.toString(), sendPlateModel.id!);
                                     StorePlate.writeInBox(homeController.parkSpaces[index]!.number.toString(), {"plateType": plateController.plateType, 'plateNo': carNumber});
-                                    PosConnection.sendToPay('0', carNumber, '0', plateController.plateType, homeController.parkSpaces[index]!.number.toString());
+                                    PosConnection.sendToPay('0', carNumber, "${DateTime.now().hour}:${DateTime.now().minute}", plateController.plateType, homeController.parkSpaces[index]!.number.toString());
                                     homeController.updateHome();
                                     Get.back();
                                   } else {

@@ -23,8 +23,11 @@ object PaymentHandler {
         intent.putExtra(Constants.CompanyName,nameCompany)
         intent.putExtra(Constants.transactionType, Constants.Sale)
         intent.putExtra(Constants.AM,amount.toString())
-        intent.putExtra(Constants.AdditionalData, "شماره پلاک : $plate\nزمان پارک : $time دقیقه")
-        intent.putExtra(Constants.AdditionalData, "جایگاه : $place ")
+        if(time == "0"){
+            intent.putExtra(Constants.AdditionalData, "شماره پلاک : $plate\nزمان پارک : $time \n جایگاه : $place ")
+        }else{
+            intent.putExtra(Constants.AdditionalData, "شماره پلاک : $plate\nزمان پارک : $time دقیقه\n جایگاه : $place ")
+        }
 
         intent.putExtra("paymentType", "CARD")
         context.startActivity(intent)

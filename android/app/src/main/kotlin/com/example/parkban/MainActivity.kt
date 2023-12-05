@@ -62,7 +62,7 @@ class MainActivity : FlutterActivity(), CallbackData {
         }
     }
 
-    fun payment(amount: String?, plate: String?, time: String?) {
+    fun payment(amount: String?, plate: String?, time: String?, place: String?) {
         PaymentHandler.startPayment(context = this, "ایمن پارک آذر", amount, plate, time, place)
     }
 
