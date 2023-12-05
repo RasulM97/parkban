@@ -45,8 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
     pk = PlatesKeys();
   }
 
-  void statusHandler(String status, String amount, String plateNo, String time, String findId, String plateType){
-    debugPrint("status : $status,\namount : $amount,\nplateNo : $plateNo,\ntime : $time,\nfindId : $findId");
+  void statusHandler(String status, String amount, String plateNo, String time, String findId, String plateType, String place){
+    debugPrint("status : $status,\namount : $amount,\nplateNo : $plateNo,\ntime : $time,\nfindId : $findId, \n place: $place");
     switch(status){
       case 'Success':
         Get.dialog(StatusDialog(massage: 'پرداخت با موفقیت انجام شد', onSubmit: () async{
@@ -89,65 +89,65 @@ class _HomeScreenState extends State<HomeScreen> {
         break;
       case 'WrongPassword':
         Get.dialog(StatusDialog(massage: 'رمز عبور اشتباه وارد شده است', onSubmitText: 'لغو', onRetryText: 'تلاش مجدد', onRetry: () async{
-          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType);
+          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType, place);
           Get.back();
-          statusHandler(status, amount, plateNo, time, findId, plateType);
+          statusHandler(status, amount, plateNo, time, findId, plateType, place);
         },), barrierDismissible: false);
         break;
       case 'TimeOut':
         Get.dialog(StatusDialog(massage: 'پرداخت انجام نشد، زمان پرداخت به اتمام رسیده است', onSubmitText: 'لغو', onRetryText: 'تلاش مجدد', onRetry: () async{
-          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType);
+          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType, place);
           Get.back();
-          statusHandler(status, amount, plateNo, time, findId, plateType);
+          statusHandler(status, amount, plateNo, time, findId, plateType, place);
         },), barrierDismissible: false);
         break;
       case 'Canceled':
         Get.dialog(StatusDialog(massage: 'پرداخت لغو گردید', onSubmitText: 'لغو', onRetryText: 'تلاش مجدد', onRetry: () async{
-          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType);
+          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType, place);
           Get.back();
-          statusHandler(status, amount, plateNo, time, findId, plateType);
+          statusHandler(status, amount, plateNo, time, findId, plateType, place);
         },), barrierDismissible: false);
         break;
       case 'WentWrong':
         Get.dialog(StatusDialog(massage: 'مشکلی در ارتباط با پرداخت پیش آمده است، ممکن است کاغذ تمام کرده باشید', onSubmitText: 'لغو', onRetryText: 'تلاش مجدد', onRetry: () async{
-          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType);
+          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType, place);
           Get.back();
-          statusHandler(status, amount, plateNo, time, findId, plateType);
+          statusHandler(status, amount, plateNo, time, findId, plateType, place);
         },), barrierDismissible: false);
         break;
       case 'Error':
         Get.dialog(StatusDialog(massage: 'مشکلی در دریافت اطلاعات پیش آمده است', onSubmitText: 'لغو', onRetryText: 'تلاش مجدد', onRetry: () async{
-          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType);
+          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType, place);
           Get.back();
-          statusHandler(status, amount, plateNo, time, findId, plateType);
+          statusHandler(status, amount, plateNo, time, findId, plateType, place);
         },), barrierDismissible: false);
         break;
       case 'Invalid':
         Get.dialog(StatusDialog(massage: 'قیمت پایین تر از حد مجاز', onSubmitText: 'لغو', onRetryText: 'تلاش مجدد', onRetry: () async{
-          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType);
+          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType, place);
           Get.back();
-          statusHandler(status, amount, plateNo, time, findId, plateType);
+          statusHandler(status, amount, plateNo, time, findId, plateType, place);
         },), barrierDismissible: false);
         break;
       case 'Paper':
         Get.dialog(StatusDialog(massage: 'رول کاغذ را چک نمایید', onSubmitText: 'لغو', onRetryText: 'تلاش مجدد', onRetry: () async{
-          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType);
+          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType, place);
           Get.back();
-          statusHandler(status, amount, plateNo, time, findId, plateType);
+          statusHandler(status, amount, plateNo, time, findId, plateType, place);
         },), barrierDismissible: false);
         break;
       case 'Range':
         Get.dialog(StatusDialog(massage: 'حداقل مبلغ برای این کارت رعایت نشده است', onSubmitText: 'لغو', onRetryText: 'تلاش مجدد', onRetry: () async{
-          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType);
+          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType, place);
           Get.back();
-          statusHandler(status, amount, plateNo, time, findId, plateType);
+          statusHandler(status, amount, plateNo, time, findId, plateType, place);
         },), barrierDismissible: false);
         break;
       case 'Limited':
         Get.dialog(StatusDialog(massage: 'سقف تراکنشات شما تمام شده است', onSubmitText: 'لغو', onRetryText: 'تلاش مجدد', onRetry: () async{
-          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType);
+          String status = await PosConnection.sendToPay(amount, plateNo, time, plateType, place);
           Get.back();
-          statusHandler(status, amount, plateNo, time, findId, plateType);
+          statusHandler(status, amount, plateNo, time, findId, plateType, place);
         },), barrierDismissible: false);
         break;
     }
@@ -385,14 +385,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   debugPrint(moneyForWallet);
                                                                 if(double.parse(finalAmount) <= 0 && findIdModel.time! <= 30 && addPriceController.text == '0') {
                                                                   Get.back();
-                                                                  statusHandler('Success', finalAmount, findIdModel.car!.number!, findIdModel.time.toString(), findIdModel.id!, findIdModel.car!.carType!);
+                                                                  statusHandler('Success', finalAmount, findIdModel.car!.number!, findIdModel.time.toString(), findIdModel.id!, findIdModel.car!.carType!, homeController.parkSpaces[index]!.number.toString());
                                                                   addPriceController.clear();
                                                                   homeController.addPrice.value = "0";
                                                                   homeController.updateHome();
                                                                 }else{
-                                                                  String status = await PosConnection.sendToPay(finalAmount, findIdModel.car!.number!, findIdModel.time.toString(), findIdModel.car!.carType!);
+                                                                  String status = await PosConnection.sendToPay(finalAmount, findIdModel.car!.number!, findIdModel.time.toString(), findIdModel.car!.carType!, homeController.parkSpaces[index]!.number.toString());
                                                                   Get.back();
-                                                                  statusHandler(status, finalAmount, findIdModel.car!.number!, findIdModel.time.toString(), findIdModel.id!, findIdModel.car!.carType!);
+                                                                  statusHandler(status, finalAmount, findIdModel.car!.number!, findIdModel.time.toString(), findIdModel.id!, findIdModel.car!.carType!, homeController.parkSpaces[index]!.number.toString());
                                                                   addPriceController.clear();
                                                                   homeController.addPrice.value = "0";
                                                                   homeController.updateHome();
@@ -566,6 +566,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     StoreReserve.writeInBox(homeController.parkSpaces[index]!.number.toString(), homeController.parkSpaces[index]!.id!.toString());
                                     StoreParkId.writeInBox(homeController.parkSpaces[index]!.number.toString(), sendPlateModel.id!);
                                     StorePlate.writeInBox(homeController.parkSpaces[index]!.number.toString(), {"plateType": plateController.plateType, 'plateNo': carNumber});
+                                    PosConnection.sendToPay('0', carNumber, '0', plateController.plateType, homeController.parkSpaces[index]!.number.toString());
                                     homeController.updateHome();
                                     Get.back();
                                   } else {

@@ -24,6 +24,7 @@ class MainActivity : FlutterActivity(), CallbackData {
     var amount: String? = ""
     var plate: String? = ""
     var time: String? = ""
+    var place: String? = ""
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         //
         PaymentHandler.checkPaper(this, "ایمن پارک آذر")
@@ -40,8 +41,9 @@ class MainActivity : FlutterActivity(), CallbackData {
                 amount = call.argument<String>("amount")
                 time = call.argument<String>("time")
                 plate = call.argument<String>("plate")
+                place = call.argument<String>("place")
                 if (isPaper) {
-                    payment(amount, plate, time)
+                    payment(amount, plate, time, place)
                 }else{
                     resultCallback!!.success("Paper")
                 }
@@ -61,7 +63,7 @@ class MainActivity : FlutterActivity(), CallbackData {
     }
 
     fun payment(amount: String?, plate: String?, time: String?) {
-        PaymentHandler.startPayment(context = this, "ایمن پارک آذر", amount, plate, time)
+        PaymentHandler.startPayment(context = this, "ایمن پارک آذر", amount, plate, time, place)
     }
 
     var myRadarReceiver: BrodCastPayment? = null

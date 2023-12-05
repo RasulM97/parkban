@@ -18,12 +18,13 @@ object PaymentHandler {
      *  add context  , company name and amount price
      *
      */
-    fun startPayment(context: MainActivity, nameCompany:String, amount:String?, plate:String?, time:String?){
+    fun startPayment(context: MainActivity, nameCompany:String, amount:String?, plate:String?, time:String?, place:String?){
         val intent= Intent(Constants.Action)
         intent.putExtra(Constants.CompanyName,nameCompany)
         intent.putExtra(Constants.transactionType, Constants.Sale)
         intent.putExtra(Constants.AM,amount.toString())
         intent.putExtra(Constants.AdditionalData, "شماره پلاک : $plate\nزمان پارک : $time دقیقه")
+        intent.putExtra(Constants.AdditionalData, "جایگاه : $place ")
 
         intent.putExtra("paymentType", "CARD")
         context.startActivity(intent)

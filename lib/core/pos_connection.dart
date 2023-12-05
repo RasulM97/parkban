@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:parkban/core/plate_helper.dart';
 
 class PosConnection{
-  static Future<String> sendToPay(String amount, String plateNo, String time, String plateType) async {
+  static Future<String> sendToPay(String amount, String plateNo, String time, String plateType, String place) async {
     String changedPlate = '';
     if(plateType.isNotEmpty){
        changedPlate = changePlateStructureForPrinting(plateType, plateNo);
@@ -13,7 +13,7 @@ class PosConnection{
     debugPrint('plaaateee $changedPlate');
     const platform = MethodChannel('send.flutter.transaction/pos');
     try {
-      return await platform.invokeMethod('payment', {'amount': amount, 'plate': changedPlate, 'time': time});
+      return await platform.invokeMethod('payment', {'amount': amount, 'plate': changedPlate, 'time': time, 'place': place});
     } on PlatformException catch (e) {
      return "Error";
     }

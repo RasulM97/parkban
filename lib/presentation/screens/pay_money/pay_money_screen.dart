@@ -113,7 +113,7 @@ class _PayMoneyScreenState extends State<PayMoneyScreen> {
                                 if (payTextController.text.isNotEmpty) {
                                   int payToInt = int.parse(payTextController.text);
                                   if (payToInt > 1300) {
-                                    String status = await PosConnection.sendToPay(payTextController.text, '', '', '').whenComplete(() => payController.paymentLoading.value = false);
+                                    String status = await PosConnection.sendToPay(payTextController.text, '', '', '', '').whenComplete(() => payController.paymentLoading.value = false);
                                     print("status $status");
                                     statusHandler(status);
                                   } else {
